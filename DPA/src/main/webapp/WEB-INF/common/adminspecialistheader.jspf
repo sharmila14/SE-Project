@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DPA</title>
+<link href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="/webjars/jquery/1.9.1/jquery.min.js"></script>
+<style>
+	.firstHeader {
+	    background-color: #608000;
+	    color: white;
+	}
+	.secondHeader {
+	    background-color: #000000;
+	    color: white;
+	}
+	.footer1 {
+	    background-color: #000000;
+	    color: white;
+	}
+	.footer2{
+		background-color: #4d6600;
+	    color: white;
+	}
+	div.tocolor li.colorli a {
+	  color: white;
+	}
+	.applyBox {
+	    background-color: #eeffcc;
+	    width: 600px;
+	    height: 260px;
+	    padding: 25px;
+	    border-radius: 25px;
+	}
+</style>
+<script>
+	function callLogout(){
+		var selectBox = document.getElementById("accountOptions");
+	    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+	    if(selectedValue == "MyAccount"){
+	    }else if(selectedValue == "Logout"){
+	     $.ajax({
+         type: "GET",
+         url: "logout",
+         success: function (result) {
+            var Backlen = history.length;
+            history.go(-Backlen);
+            window.location.href="/dpa/login";
+         },
+         error: function (result) {
+            // do something.
+         }
+         });
+	    }
+	}
+	function dpiInformation(){
+		$.post('viewDPI',  
+	    function(result){
+	         $('#toChange').html(result);
+		});
+	}
+	function staffDirectory(){
+	$.post('staffDirectory',  
+	    function(result){
+	         $('#toChange').html(result);
+		});
+	}
+	function contactUs(){
+		$.post('contactUs',  
+	    function(result){
+	         $('#toChange').html(result);
+		});
+	}
+</script>
+</head>
+<body id="toChangeWhole">
+<nav class="navbar navbar-default" >
+ 	<div class="container-fluid firstHeader">
+      	<h3 style = "text-align:center;">DPA CSCE UNT</h3>
+	</div>
+	<div class="container-fluid secondHeader">
+    	<div class="navbar-header tocolor">
+  			<ul class="nav navbar-nav">
+      			<li class="colorli"><a href="adminspecialisthome">Home</a></li>
+            	<li class="colorli"><a href="javascript:dpiInformation();">DPI</a></li>
+            	<li class="colorli"><a href="javascript:staffDirectory();">StaffDirectory</a></li>
+            	<li class="colorli"><a href="slistAS">StudentList</a></li>
+            	<li class="colorli"><a href="updateDPI">Update DPI</a></li>
+            	<li class="colorli"><a href="javascript:contactUs();">Contact Us</a></li>
+    		</ul>
+    	</div>
+    	<ul class="nav navbar-nav navbar-right">
+    			<li><a><select class="form-control field" id ="accountOptions" name="accountOptions" style="border:0px;outline:0px" onchange="callLogout();">
+					  <option value="UserName">${sessionScope.userName}</option>
+					  <option value="MyAccount">MyAccount</option>
+					  <option value="Logout">Logout</option>
+					</select>
+				</a></li>
+		</ul>
+    </div>
+</nav>

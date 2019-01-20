@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DPA</title>
+<link href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+<style>
+	.firstHeader {
+	    background-color: #608000;
+	    color: white;
+	}
+	.secondHeader {
+	    background-color: #000000;
+	    color: white;
+	}
+	.footer1 {
+	    background-color: #000000;
+	    color: white;
+	}
+	.footer2{
+		background-color: #4d6600;
+	    color: white;
+	}
+	div.tocolor li.colorli a {
+	  color: white;
+	}
+</style>
+<script>
+	function dpiInformation(){
+		$.post('viewDPI',  
+	    function(result){
+	         $('#toChange').html(result);
+		});
+	}
+	function contactUs(){
+		$.post('contactUs',  
+	    function(result){
+	         $('#toChange').html(result);
+		});
+	}
+</script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+ 	<div class="container-fluid firstHeader">
+      	<h3 style = "text-align:center;">DPA CSCE UNT</h3>
+	</div>
+	<div class="container-fluid secondHeader">
+    	<div class="navbar-header tocolor">
+  			<ul class="nav navbar-nav">
+      			<li class = "colorli"><a href="login">Home</a></li>
+            	<li class = "colorli"><a href="javascript:dpiInformation();">DPI</a></li>
+            	<li class = "colorli"><a href="javascript:contactUs();">ContactUs</a></li>
+    		</ul>
+    	</div>
+    </div>
+</nav>
